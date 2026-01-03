@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<h1>Login</h1>
+
+<div th:if="${param.error}">Invalid username/password</div>
+<div th:if="${param.logout}">You have been logged out</div>
+
+<form th:action="@{/login}" method="post">
+    <div>
+        <label >Mobile</label>
+        <label>
+            <input type="text" name="mobile" placeholder="Mobile">
+        </label>
+    </div>
+    <div>
+        <label >PIN</label>
+        <label>
+            <input type="password" name="pin" placeholder="PIN">
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" name="remember">
+        </label> Remember Me
+    </div>
+
+    <button type="submit" value="Login">Login</button>
+</form>
+
+
+<div sec:authorize="isAnonymous()">
+    This block is for anonymous user
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    This block is for authenticated user
+</div>
+
+</body>
+</html>
